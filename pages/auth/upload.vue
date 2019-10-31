@@ -114,7 +114,7 @@ export default {
             .then(response => {
               //handle success
               this.band = response.data.band
-              this.$router.push('/auth/added' + this.band.slug)
+              this.$router.push('/auth/added/' + this.band.slug)
               this.loaderStatus = false
             })
             .catch(err => {
