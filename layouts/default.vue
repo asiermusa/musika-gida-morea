@@ -15,9 +15,11 @@
           <i class="la la-plus"></i>
         </nuxt-link>
 
-        <transition name="fade" mode="out-in">
-          <nuxt/>
-        </transition>
+        <div class="page-content">
+          <transition name="fade" mode="out-in">
+            <nuxt/>
+          </transition>
+        </div>
 
       </div>
 
@@ -27,7 +29,7 @@
 
       <div class="powered-by">
         <!-- <img src="~/assets/img/iparragirre.png" alt="Iparragirre Rock Elkartea"> -->
-        Gernikako <strong>Iparragirre Rock Elkartearen</strong> proiektua
+        <strong>Iparragirre Rock Elkartearen</strong> proiektua
       </div>
       <div class="author">
         Aplikazioaren garapena @asiermusa
@@ -61,13 +63,16 @@ export default {
     this._networkStatus()
 
     // push askForPermissioToReceiveNotificationssetTimeout( () => {
-    this._pushNotifications()
+    setTimeout(()=> {
+      this._pushNotifications()
+    }, 1000)
+
 
     // console message
     let styleLog1 = "padding: 5px; background: #7b3772; display: inline-block; color:#ffffff; font-weight: bold; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;",
       styleLog2 = styleLog1 + " font-weight: normal; background: #111; color: #fff;",
       styleLog3 = styleLog2 + " display: block; color: #222; background: #fff;"
-    console.log("%c#MusikaGidaMorea %cVue.js eta Nuxt bidez egina %cAplikazioren garapena @asiermusa\n", styleLog1, styleLog2, styleLog3)
+    console.log("%c#MusikaGidaMorea %cVue.js eta Nuxt bidez egina %cAplikazioaren garapena @asiermusa\n", styleLog1, styleLog2, styleLog3)
   },
   methods: {
     _networkStatus(){
@@ -77,17 +82,18 @@ export default {
       let pushStatus = window.localStorage.getItem('__gidamorea-push')
       if(!pushStatus){
         localStorage.setItem('__gidamorea-push', true)
-         const getToken = await askForPermissioToReceiveNotifications()
-         try {
-           let postData = {
-             mode: 'subscribe',
-             token: getToken,
-           }
-           this.$axios.post(config.apiURL + '/firebase', postData).then()
-         }
-         catch(err) {
-           console.log(err)
-         }
+        const getToken = await askForPermissioToReceiveNotifications()
+        try {
+          let postData = {
+            topic: config.pushTopic,
+            mode: 'subscribe',
+            token: getToken,
+          }
+          this.$axios.post(config.apiURL + '/firebase', postData).then()
+        }
+        catch(err) {
+          console.log(err)
+        }
       }
     }
   },
@@ -122,14 +128,17 @@ html {
 }
 
 .main {
-  max-width: 1400px;
-  position: relative;
   display: flex;
+  max-width: 1600px;
+  position: relative;
   flex-wrap: nowrap;
   flex-direction: column;
+  margin: 0 auto;
+  padding: 0;
   min-height: calc(100vh - 100px);
   @include from(sm){
     flex-direction: row;
+    padding: 0 30px;
   }
   &__search {
     width: auto;
@@ -141,14 +150,24 @@ html {
   }
 
   &__content {
+    display: block;
     width: 100%;
     position: relative;
     background: white;
     padding: 0;
-    margin: 82px 0 0 0;
+    margin: 82px 0 20px 0;
+
     @include from(sm) {
-      margin: 150px 0 0 0;
-      padding: 0 20px 0 360px;
+      display: flex;
+      align-items: flex-start;
+      margin: 150px 0 70px 0;
+    }
+
+    .page-content {
+      width: 100%;
+      @include from(sm) {
+        width: 72%;
+      }
     }
   }
 
@@ -168,22 +187,23 @@ html {
 
   &__footer {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     flex-direction: column;
     width: 100%;
     background: rgba(black,.03);
-    font-size: 12px;
-    line-height: 20px;
     padding: 20px;
+    line-height: 16px;
     box-sizing: border-box;
-    margin-top: 60px;
+    @include from(sm){
+      padding: 20px 30px;
+    }
 
     .powered-by {
-      width: 100%;
-      font-size: 12px;
-      text-align: center;
+      width: calc(100% - 70px);
+      font-size: 10px;
+      text-align: left;
       @include from(sm){
-        text-align: right;
+        font-size: 11px;
       }
       img {
         max-width: 100px;
@@ -191,11 +211,11 @@ html {
       }
     }
     .author {
-      width: 100%;
-      font-size: 10px;
-      text-align: center;
+      width: calc(100% - 90px);
+      font-size: 9px;
+      text-align: left;
       @include from(sm){
-        text-align: right;
+        font-size: 10px;
       }
     }
   }
@@ -211,7 +231,7 @@ html {
 .new-band-btn {
   position: fixed;
   z-index: 999;
-  bottom: 70px;
+  bottom: 10px;
   right: 20px;
   width: 50px;
   height: 50px;

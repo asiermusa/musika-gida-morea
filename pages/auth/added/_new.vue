@@ -4,8 +4,9 @@
     <div class="new-band">
       <div class="new-band__icon"><i class="la la-check"></i></div>
       <div class="new-band__title">Taldea ondo gorde da</div>
-      <div class="new-band__desc"><span class="new-band__name">{{ this.$route.params.new }}</span> taldearen atuak ondo
-        jaso dira. Ahalik eta azkarren informazioa berrikusi eta publikatuko dugu.
+      <div class="new-band__desc"><span class="new-band__name">{{ this.$route.params.new }}</span>
+        taldearen datuak ondo jaso dira. Ahalik eta azkarren informazioa berrikusi 
+        eta publikatuko dugu.
         <br><br>Eskerrik asko!</div>
     </div>
 
@@ -40,7 +41,7 @@ export default {
     text-transform: uppercase;
     font-weight: bold;
   }
-  
+
   &__icon {
     text-align: center;
     margin: 20px 0;

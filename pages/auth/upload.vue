@@ -93,16 +93,16 @@ export default {
       if (!this.band.country)
         this.messages.errors.push("Taldearen herrialdea.")
 
+      if (!this.band.town)
+        this.messages.errors.push("Taldearen herria.")
+
       if (!this.band.members)
         this.messages.errors.push("Taldekide kopurua.")
 
       if (!this.band.women)
         this.messages.errors.push("Emakume kopurua.")
 
-      if (!this.band.women)
-        this.messages.errors.push("Emakume kopurua.")
-
-      if (this.band.members && this.band.women && this.band.women > this.band.members){
+      if (Number(this.band.women) > Number(this.band.members)){
         this.messages.errors.push("Emakume kopurua ezin da taldekide kopurua baino handiago izan.")
       }
 

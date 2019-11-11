@@ -21,12 +21,13 @@ let socialList = [
 
 if (env == 'development'){
   keys = {
-    apiURL: 'http://127.0.0.1:3000/api/v1',
-    serverURL: 'http://127.0.0.1:3000',
+    apiURL: 'http://127.0.0.1:5000/api/v1',
+    serverURL: 'http://127.0.0.1:5000',
     backendCallbackSLUG: '',
     countryList,
     socialList,
-    title: 'Musika Gida Morea ♀'
+    title: 'Musika Gida Morea ♀',
+    pushTopic: 'musikaMorea11-06'
   }
 }
 else{
@@ -36,7 +37,8 @@ else{
     backendCallbackSLUG: '/gidamorea-jwt',
     countryList,
     socialList,
-    title: 'Musika Gida Morea ♀'
+    title: 'Musika Gida Morea ♀',
+    pushTopic: 'musikaMorea11-06'
   }
 }
 

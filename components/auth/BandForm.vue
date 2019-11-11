@@ -105,6 +105,19 @@
                 <iframe :src="videoUrl" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
               </div>
             </div>
+
+            <!-- band CONTACT -->
+            <div class="update-form__title">
+              Harremana
+            </div>
+            <div class="update-form__desc">
+              Taldearekin zuzenean harremanetan jartzeko bide nagusiak. Telefono edo
+              email bat baino gehiago sartzeko <strong>koma</strong> baten bidez bereiztu.
+            </div>
+
+            <input type="text" name="phone" placeholder="Telefonoa(k)" v-model="band.phone">
+            <input type="text" name="email" placeholder="Emaila(k)" v-model="band.email">
+
             <!-- band LINKS -->
             <div class="update-form__title">
               Kanpo loturak
@@ -271,7 +284,6 @@ export default {
           this.videoUrl = ''
           this.videoError = true
         }
-
         if(url == ''){
           this.videoError = false
           this.videoUrl = this.band.video

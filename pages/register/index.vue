@@ -28,7 +28,7 @@
       <div class="content__desc">
         <strong>Google</strong> bidez izena emateko, zoaz zuzenean saioa hastera. Ez duzu beste ezer bete beharrik!<br><br>
         Email bidez izena emateko bete beheko formularioa eta emandako emailean jasoko duzu kontua
-        aktibatzeko lotura bat.</div>
+        aktibatzeko lotura bat. Ikusi SPAM karpetan badaezpada ere.</div>
       <form class="" method="post" @submit.prevent="_register()">
         <input type="text" name="username" v-model="username" placeholder="Emaila">
         <input type="password" name="password" v-model="password" placeholder="Pasahitza">

@@ -1,5 +1,6 @@
 <template>
   <div class="search-box" :class="{ isClose : !open }">
+
     <div class="search-box__controls">
       <button class="open" v-if="open == false" @click="_handleOpen('open')">
         <span>Bilaketa berria egin</span> <i class="la la-search"></i>
@@ -10,38 +11,36 @@
       </button>
     </div>
 
+    <form class="search-box-container" id="searchBox" method="post" @submit.prevent="_send()">
 
-      <form class="search-box-container" id="searchBox" method="post" @submit.prevent="_send()">
+      <div class="search-box__inputs">
+        <input type="text" placeholder="Taldearen izena" v-model="searchData.name" @focus="_focusEvent()">
+        <input type="text" placeholder="Musika mota" v-model="searchData.music" @focus="_focusEvent()">
+      </div>
 
-        <div class="search-box__inputs">
-          <input type="text" placeholder="Taldearen izena" v-model="searchData.name" @focus="_focusEvent()">
-          <input type="text" placeholder="Taldearen estiloa" v-model="searchData.music" @focus="_focusEvent()">
-        </div>
+      <div class="slidecontainer">
+        <div class="text">Emakumezkoen portzentaia</div>
+        <input type="range" min="1" max="100" value="" class="slider" v-model="searchData.percent">
+        <div class="search-box__qty"><strong>%<span v-text="total"></span></strong></div>
+      </div>
 
-        <div class="slidecontainer">
-          <div class="text">Emakumezkoen portzentaia</div>
-          <input type="range" min="1" max="100" value="" class="slider" v-model="searchData.percent">
-          <div class="search-box__qty"><strong>%<span v-text="total"></span></strong></div>
-        </div>
+      <div class="checkbox-container">
+        <label class="checkbox-label">Alfabetikoki ordenatu
+          <input type="checkbox" v-model="searchData.order.byName">
+          <span class="checkmark"></span>
+        </label>
+        <label class="checkbox-label">Emakume kopuruz ordenatu
+          <input type="checkbox" v-model="searchData.order.byWomen">
+          <span class="checkmark"></span>
+        </label>
+      </div>
 
-        <div class="checkbox-container">
-          <label class="checkbox-label">Alfabetikoki ordenatu
-            <input type="checkbox" v-model="searchData.order.byName">
-            <span class="checkmark"></span>
-          </label>
-          <label class="checkbox-label">Emakume kopuruz ordenatu
-            <input type="checkbox" v-model="searchData.order.byWomen">
-            <span class="checkmark"></span>
-          </label>
-        </div>
+      <button type="submit" class="submit">
+        <loader v-if="loaderStatus" color="white" margin="no-margin"></loader>
+        <span v-else>Bilaketa egin</span>
+      </button>
 
-        <button type="submit" class="submit">
-          <loader v-if="loaderStatus" color="white" margin="no-margin"></loader>
-          <span v-else>Bilaketa egin</span>
-        </button>
-
-      </form>
-
+    </form>
 
   </div>
 </template>
@@ -78,9 +77,9 @@ export default {
     // window.addEventListener('resize', this._getWindowWidth)
   },
   computed: {
-    ...mapGetters({
-      searchEvent: 'search/getSearchEvent'
-    }),
+    // ...mapGetters({
+    //   searchEvent: 'search/getSearchEvent'
+    // }),
     total() {
       return this.searchData.percent
     }
@@ -96,11 +95,24 @@ export default {
           this.open = false
         }
     },
-    searchEvent: {
-      handler: function() {
-        this.loaderStatus = false
-      },
-      deep:true
+    $route (to, from){
+        if(to.name == 'bands') {
+          document.getElementById("searchBox").classList.add('opened')
+          this.open = true
+
+          let postData = {
+            name: '',
+            music: '',
+            percent: 1,
+            byName: false,
+            byWomen: false
+          }
+          this.$store.dispatch('search/changeSearchAction', postData)
+
+        }else{
+          document.getElementById("searchBox").classList.remove('opened')
+          this.open = false
+        }
     }
   },
   methods: {
@@ -136,7 +148,9 @@ export default {
         byName: this.searchData.order.byName,
         byWomen: this.searchData.order.byWomen
       }
-      this.$store.dispatch('search/changeSearchAction', postData)
+      this.$store.dispatch('search/changeSearchAction', postData).then(res => {
+        this.loaderStatus = false
+      })
     }
   }
 }
@@ -148,8 +162,29 @@ export default {
 
 .search-box {
   overflow: hidden;
-  position: relative;
   max-height: 500px;
+  width: calc(100% - 40px);
+  margin: 0 auto;
+  margin-bottom: 30px;
+  position: relative;
+  background-image: linear-gradient(45deg, $primary, darken($primary, 5%));
+  padding: 15px;
+  border-radius: 8px;
+  z-index: 9;
+
+  @include from(sm){
+    position: relative;
+    width: 45%;
+    margin-right: 4%;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 110px;
+  }
+
+  @include from(md){
+    width: 25%;
+  }
+
   form {
     max-height: 0px;
     margin-top: 20px;
@@ -205,22 +240,6 @@ export default {
     @include from(sm){
        display: none;
     }
-  }
-
-  position: relative;
-  width: 92%;
-  background-image: linear-gradient(45deg, $primary, darken($primary,10%));
-  padding: 15px;
-  border-radius: 8px;
-  margin: 15px auto;
-
-  @include from(sm){
-    position: fixed;
-    left: 30px;
-    top: 150px;
-    width: 300px;
-    margin: 0;
-    z-index: 1;
   }
 
   .submit {

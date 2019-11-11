@@ -203,6 +203,31 @@ export default {
         margin-right: 0;
       }
     }
+
+    @include from(lg) {
+      width: 30%;
+      margin-right: 5%;
+      &:nth-child(2n){
+        margin-right: 5%;
+      }
+      &:nth-child(3n){
+        margin-right: 0;
+      }
+    }
+
+    @include from(xl) {
+      width: 22%;
+      margin-right: 4%;
+      &:nth-child(2n){
+        margin-right: 4%;
+      }
+      &:nth-child(3n){
+        margin-right: 4%;
+      }
+      &:nth-child(4n){
+        margin-right: 0;
+      }
+    }
   }
 
   &__img-content {
@@ -231,11 +256,12 @@ export default {
     padding: 10px;
     transition: .2s;
     background: white;
-    height: 135px;
+    height: 125px;
     transform: translateY(0);
 
     @include from(sm){
       padding: 20px;
+      height: 135px;
     }
   }
 
@@ -283,16 +309,19 @@ export default {
   }
 
   &__name {
-    display: flex;
-    align-items: center;
+    display: block;
     margin-bottom: 10px;
-    font-size: 16px;
-    min-height: 30px;
+    font-size: 14px;
+    min-height: 20px;
     font-weight: bold;
     text-transform: uppercase;
     white-space: nowrap;
     overflow: hidden !important;
     text-overflow: ellipsis;
+    @include from(sm){
+      font-size: 16px;
+      min-height: 30px;
+    }
   }
 
   &__details {

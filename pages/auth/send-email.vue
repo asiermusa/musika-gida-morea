@@ -16,7 +16,8 @@
 
         <div class="content__desc">
           Bidali iezaiozu talde bat edo gehiagoren informazioa nahi duzunari:
-          Jai batzorde, kontzertu antolatzaile... edo beste edonorri.
+          Jai batzorde, kontzertu antolatzaile... edo beste edonorri. Badaezpada
+          esaiozu SPAM karpetan ikusteko emaila heldu dela ziurtatzeko.
         </div>
 
         <div class="content__desc">

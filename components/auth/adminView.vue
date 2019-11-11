@@ -102,7 +102,7 @@ export default {
 @import '~/assets/scss/main.scss';
 
 .admin {
-  background: $primary;
+  background-image: linear-gradient(45deg, $primary, darken($primary, 5%));
   color: white;
   padding: 20px;
   font-weight: bold;

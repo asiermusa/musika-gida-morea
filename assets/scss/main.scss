@@ -4,7 +4,8 @@ $breakpoints: (
   xs: 480px,
   sm: 768px,
   md: 992px,
-  lg: 1100px
+  lg: 1200px,
+  xl: 1600px
 ); // primary colors
 $primary: #7b3772; //morado 7b3772
 $secondary: #7149ad; //morado oscuro 7149ad
@@ -241,18 +242,25 @@ button.submit,
 }
 
 .notifications {
-  width: 300px !important;
-  margin: 90px 15px 15px 0;
+  width: calc(100% - 20px) !important;
+  margin: 80px 0;
   display: flex;
   justify-content: flex-end;
+  @include from(sm) {
+    width: 380px !important;
+    margin: 90px 30px 30px 0;
+  }
 }
 
 .alerts {
   padding: 20px;
-  margin: 5px;
   border-radius: 4px;
+  margin-bottom: 15px;
+  margin-right: 20px;
   border: 2px solid rgba(black,.06);
-  width: 300px;
+  @include from(sm) {
+    margin-right: 0;
+  }
 
   .title {
     font-size: 13px;

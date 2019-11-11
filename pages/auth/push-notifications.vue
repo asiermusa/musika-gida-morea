@@ -17,8 +17,7 @@
         <div v-if="currentUser.role == 'administrator'">
           <div class="content__title">Jakinarazpen berria bidali</div>
           <div class="content__desc">
-            Jakinarazpena bidaltzeko gai konkretu baera bidali behar da. Gure kasuan
-            <strong>musikaGidaMorea</strong> erabiliko dugu gai nagusi moduan.
+            Jakinarazpena bidaltzeko gai konkretu baera bidali behar da.
           </div>
 
           <input type="text" v-model="push.topic" placeholder="Jakinarazpenaren gaia">

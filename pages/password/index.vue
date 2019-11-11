@@ -13,6 +13,7 @@
 
     <div class="content__desc">
       Zure pasahitza berrezartzeko eman zure emaila eta argibideak jasoko dituzu emandako helbidean.
+       Ikusi SPAM karpetan badaezpada ere.
     </div>
 
     <form class="password-forgotten__form" action="index.html" method="post" @submit.prevent="_passwordReset()">

@@ -21,7 +21,7 @@
           </ul>
         </div>
 
-        <div v-if="band.bio" class="band__desc">{{ band.bio}}</div>
+        <div style="white-space: pre-line" class="band__desc">{{ band.bio}}</div>
 
         <div class="band-icons">
           <div class="band-icons__icon"><i class="la la-group"></i>
@@ -43,6 +43,7 @@
           <div class="progress-bar__percent">%{{band.percent}}</div>
         </div>
 
+
         <div class="band__video" v-if="band.video">
           <div class="band__desc">Taldearen bideoa</div>
           <div class="band__video-responsive">
@@ -50,9 +51,25 @@
           </div>
         </div>
 
-        <div v-if="band.social">
-          <div class="band__desc">Taldearekin kontaktatzeko erabili itzazu ondoko loturak:</div>
-          <ul class="band__social">
+        <div v-if="band.social || band.phone || band.email">
+          <div class="band__title">Harremana eta kontaktua</div>
+          <div class="band__desc">Taldearekin zuzenean kontaktatzeko telefono eta emailak.
+          Egin klik zuzenean deitu edo emaila bidaltzeko.</div>
+
+
+          <ul v-if="band.phone || band.email" class="band__social">
+            <li v-if="band.phone" v-for="phone in phones">
+              <a :href="'tel:' + phone"><i class="la la-phone"></i> {{phone}}</a>
+            </li>
+            <li v-if="band.email" v-for="email in emails" class="item">
+              <a :href="'mailto:' + email"><i class="la la-envelope"></i> {{email}}</a>
+            </li>
+          </ul>
+
+
+          <div v-if="band.social" class="band__desc">Informazio gehiagorako bisitatu taldearen kanpo loturak:</div>
+
+          <ul v-if="band.social" class="band__social">
               <li v-for="(input, index) in band.social" :data-id="index" class="item">
                 <a :href="input[1]" target="_blank">
                   <i class="la la-external-link"></i> {{input[0]}}
@@ -106,6 +123,12 @@ export default {
   computed: {
     musicStyles(){
       return this.band.music.split(',')
+    },
+    phones(){
+      return this.band.phone.split(',')
+    },
+    emails(){
+      return this.band.email.split(',')
     }
   }
 }
@@ -117,7 +140,7 @@ export default {
 .pic-header {
   position: fixed;
   left: 0;
-  top: 82px;
+  top: 75px;
   z-index: 0;
   height: 350px;
   width: 100%;
@@ -126,12 +149,13 @@ export default {
   background-repeat: no-repeat;
   background-attachment: fixed;
   animation: backgroundPic .3s;
-  animation-delay: .6s;
+  animation-delay: .3s;
   animation-fill-mode: forwards;
   opacity: 0;
   display: none;
   @include from(sm){
     display: block;
+    mix-blend-mode: multiply;
   }
   &:after {
     content: '';
@@ -140,14 +164,14 @@ export default {
     width: 100%;
     height: 100%;
     background-image: linear-gradient(45deg, transparent, #f2f2f2, #f2f2f2);
-    opacity: .8;
-    //mix-blend-mode: multiply;
+    opacity: .9;
+
   }
 }
 .band {
   position: relative;
   display: flex;
-  padding: 30px;
+  padding: 20px;
   border-radius: 5px;
 
   &-icons {
@@ -266,10 +290,28 @@ export default {
         display: inline-block;
         text-transform: uppercase;
         font-size: 11px;
-        margin-right: 5px;
+        margin: 0 5px 5px 0;
         border-radius: 3px;
         border: 1px solid rgba(black,.06);
         padding: 3px 6px;
+      }
+    }
+  }
+  ul.contact-list {
+    display: flex;
+    margin-bottom: 15px;
+    li a {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: bold;
+      border-radius: 3px;
+      border: 1px solid rgba(black,.06);
+      margin-right: 5px;
+      padding: 8px;
+      transition: all .15s;
+      &:hover {
+        background: $primary;
+        color: white;
       }
     }
   }

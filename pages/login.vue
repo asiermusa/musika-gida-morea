@@ -15,7 +15,8 @@
     </div>
 
     <form class="login__form" method="post" @submit.prevent="_login()">
-      <div class="content__desc">Edo zure erabiltzaile eta pasahitza erabiliz sartu zaitezke.</div>
+      <div class="content__desc">Edo zure erabiltzaile eta pasahitza erabiliz sartu zaitezke. Gogoratu
+      email bidez bidalitako loturan erabiltzailea aktibatzeaz saioa hasteko.</div>
       <input type="text" name="username" v-model="username" placeholder="Emaila">
       <input type="password" name="password" v-model="password" placeholder="Pasahitza">
       <button  type="submit" class="submit">
@@ -100,8 +101,7 @@ export default {
     },
     _onMessage (e) {
       //if e.origin !== window.origin
-      // console.log('e', e)
-      // console.log('server', config.serverURL)
+
       if (e.origin + config.backendCallbackSLUG !== config.serverURL || !e.data.token) {
         return
       }

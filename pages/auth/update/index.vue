@@ -9,7 +9,7 @@
       <div class="admin__desc">
         Administrari bezala erabiltzaile guztiek igotako talde guztiak ikusten zabiltza,
         aktibo daudenak eta aktibatzeko falta direnak barne <strong>({{ total }} talde).</strong>
-        <br>Kontu handiz egin, egin beharreko aldaketak.
+        Kontu handiz egin, egin beharreko aldaketak.
       </div>
     </div>
 
@@ -212,6 +212,9 @@ export default {
   }
   &__user {
     font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
   }
   &__actions {
     display: flex;

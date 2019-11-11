@@ -5,19 +5,21 @@
 
     <div class="content">
       <div class="content__desc">
-        Musika gida moreak autokritika du abiapuntu. Iparragirre rock elkartean
-        urtero hartu dugu agenda programatzerakoan emakumeen presentzia bermatzeko
-        konpromisoa. Hala ere, urte erdira heltzerako gure buruetako datu base
-        patriarkalak agintzen hasten dira, eta sasoi amaieran egiten dugun balorazioan
-        beti arazo berbera azaltzen zaigu: emakumeen presentzia urria.
+        Musika gida moreak autokritika du abiapuntu. Iparragirre Rock Elkartean,
+        urteroko programazioan emakumez osaturiko taldeak bermatzea izan da helburuetako
+        bat. Hala ere, sasoi amaieretara heldutakoan, proposamen hau bete gabe geratu dela
+        konturatu izan gara. Hausnarketa eginez ta egoera honi buelta emateko ahaleginetan,
+        galdera pilo batekin egin dugu topo: arazo honekin kontzientziatuak egon arren,
+        zein oztoporekin egiten dugu talka egunerokotasunean? Zein da hain barneratua dugun musika eredua?
+        Benetan, hain gutxi al dira rock munduan neskaz osotutako taldeak? Zergatik ez ditugu ezagutzen?...
       </div>
 
       <div class="content__desc">
-        Hortik tiraka musika gida morea sortzeko ideiak indarra hartu zuen, egon badauden emakumeen
-        presentzia duten taldeen informazioa batu ahal izateko, horrek programatzerako
-        orduan gure konpromisoa betetzen lagunduko digulakoan. Tresna hau guztion eskura
-        jarri dugu, behingoz kontzertu programatzaileok faktore horri garrantzia ematen
-        hasteko.
+        Gaiaren konplexutasuna kontutan izanda, azkeneko galderei erantzun bat emotekotan
+        sortu da Musika gida morea. Tresna honen helburua, emakumeen presentzia duen edozein talderi
+        buruzko informazioa jasoko duen datu base digital zabal ta erabilgarri bat aurkeztea da,
+        behingoz informazio falta ez dadin arrazoi edo aitzakiatzat hartu gure taulen gainean
+        emakumezko erreferentziarik ez egoteko.
       </div>
 
       <div class="content__title">
@@ -25,13 +27,13 @@
       </div>
 
       <div class="content__desc">
-        Taleren bat falta dela uste baduzu, edo talde bati buruzko informazio gehigarririk
+        Talderen bat falta dela uste baduzu, edo talde bati buruzko informazio gehigarririk
         helarazi nahi badiguzu, eman izena aplikazioan eta bete ezazu fitxa! oso erraza da!
       </div>
 
       <div class="content__desc">
-        Azpian dauen mapa eta grafika ezberdinetan, errealitatearen islada aurkituko dugu
-        eta errealitate hori indartzen saiatuko gara.
+        Behin taldeen zerrenda osatzen goazen heinean, azpian dauen mapa eta grafika ezberdinetan,
+        errealitatearen islada aurkituko dugu eta errealitate hori indartzen saiatuko gara.
       </div>
 
       <div class="content__desc">
@@ -66,8 +68,8 @@
           <div class="map__info-content" :class="{regionLoad}">
 
             <div class="map__title">{{ region }}</div>
-            <ul v-for="band in regionData">
-              <li>
+            <ul>
+              <li v-for="band in regionData">
                 <nuxt-link :to="'bands/' + band.slug">
                   <i class="la la-angle-right"></i> {{band.name}}
                 </nuxt-link>
@@ -278,6 +280,7 @@ export default {
        const getToken = await askForPermissioToReceiveNotifications()
        try {
          let postData = {
+           topic: config.pushTopic,
            mode: (this.subStatus == true) ? 'subscribe' : 'unsubscribe',
            token: getToken,
          }
@@ -343,6 +346,9 @@ export default {
     }
 
     ul {
+      max-height: 100px;
+      overflow: auto;
+
       li {
         padding: 5px 0;
         width: 100%;

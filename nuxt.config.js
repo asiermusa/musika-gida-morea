@@ -21,10 +21,10 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no"' },
-      { hid: 'description', name: 'description', content: 'Euskal Herriko emakumezko taldeen bozgorailua.' }
+      { hid: 'description', name: 'description', content: 'Emakumeen presentzia duten taldeen bozgorailua.' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      //{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
 
@@ -80,7 +80,7 @@ module.exports = {
 
   manifest: {
     name: 'Musika Gida Morea',
-    short_name: "MGMorea",
+    short_name: "Musika Morea",
     lang: 'eus',
     theme_color: "#ffffff", //#7b3772
     background_color: "#ffffff",

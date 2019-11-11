@@ -9,7 +9,7 @@
       message="Zure pasahitza ondo aldatu da.">
     </message>
 
-    <h1>Pasahitza aldatu</h1>
+    <h2>Pasahitza aldatu</h2>
     <div class="content__desc">Zure pasahitza aldatzeko aukeratu berri bat hemen:</div>
     <form class="" method="post" @submit.prevent="_passwordReset()">
       <input type="password" name="newPassword" v-model="newPassword" placeholder="Pasahitza berria">

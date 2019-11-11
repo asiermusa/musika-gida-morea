@@ -35,9 +35,6 @@
       <li>
         <nuxt-link to="/zer-da">Zer da gida hau</nuxt-link>
       </li>
-      <li class="connected">
-        Konektatuta zaude
-      </li>
       <li class="main-menu__has-submenu js-submenu avatar" @click.prevent.stop="_submenu()" :class="{avatarActive : isActive}">
 
         <img v-if="user.auth.picture"
@@ -51,7 +48,17 @@
         <ul class="main-menu__menu-submenu" :class="{submenuActive : isActive}">
           <li class="user-details">
             <a>
-              <i class="la la-user"></i> {{user.auth.user}}
+              <img v-if="user.auth.picture"
+                :src="user.auth.picture">
+
+              <v-gravatar v-else
+                :email="user.auth.user"
+                :size="150" />
+
+              <span>
+                {{user.auth.user}}
+              </span>
+
             </a>
           </li>
           <li>
@@ -168,13 +175,13 @@ export default {
   align-items: flex-start;
   flex-direction: column;
   width: 100%;
-  padding: 15px 30px;
+  padding: 15px 20px;
   background: white;
   @include from(sm){
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    padding: 8px 30px;
+    padding: 0 30px;
     border-bottom: 2px solid rgba(black,.06);
   }
 
@@ -189,9 +196,8 @@ export default {
   &__btn {
     display: block;
     position: fixed;
-    top: 25px;
-    right: 15px;
-    height: 40px;
+    top: 20px;
+    right: 10px;
     outline: 0;
     @include from(sm){
       display: none;
@@ -200,11 +206,9 @@ export default {
   &__logo {
     padding: 0 !important;
     margin: 0 !important;
-    height: 65px;
-    width: 150px;
+    max-height: 50px;
     img {
-      height: 65px;
-      min-width: 100px;
+      height: 50px;
       cursor: pointer;
       transition: all .1s;
       &:hover {
@@ -219,7 +223,7 @@ export default {
     justify-content: flex-end;
     flex-direction: column;
     padding: 0;
-    top: 82px;
+    top: 75px;
     left: 0;
     background: white;
     list-style: none;
@@ -236,14 +240,20 @@ export default {
       height: auto;
     }
 
-    & > li > a {
+    & > li a {
       position: relative;
+      display: block;
+      line-height: 40px;
+      @include from(sm) {
+        line-height: 75px;
+      }
+
       &:after {
         @include from(sm){
           transition: all .15s;
           content: '';
           position: absolute;
-          bottom: 0;
+          bottom: -2px;
           left: 0;
           width: 100%;
           height: 2px;
@@ -271,7 +281,7 @@ export default {
       flex-direction: column;
       margin: 0;
       position: relative;
-      line-height: 60px;
+      line-height: 0;
 
       &:hover {
         cursor: pointer;
@@ -286,13 +296,12 @@ export default {
       }
 
       &.avatar {
-        padding-left: 15px;
         &Active {
           &:before{
             content: '';
             position: absolute;
             z-index: -1;
-            border-radius: 20px;
+            border-radius: 50%;
             height: 40px;
             width: 40px;
             background: rgba($primary, 1);
@@ -308,7 +317,7 @@ export default {
         padding-right: 0;
       }
       & img {
-        border-radius: 8px;
+        border-radius: 50%;
         border: 2px solid rgba(black,.1);
         width: 40px;
         height: 40px;
@@ -317,8 +326,27 @@ export default {
           display: block;
         }
       }
-      &.user-details {
+      &.user-details a {
         font-weight: bold;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        @include from(sm){
+          justify-content: flex-end;
+        }
+        img {
+          border-radius: 50%;
+          height: 40px;
+          width: 40px;
+          display: inline-block;
+          margin-right: 10px;
+          @include from(sm) {
+            display: none;
+          }
+        }
       }
 
       &.featured {
@@ -350,7 +378,7 @@ export default {
         position: absolute;
         padding: 0 5px;
         width: 250px;
-        top: 70px;
+        top: 75px;
         right: 0;
         text-align: right;
         border: 1px solid rgba(black,.15);
@@ -368,7 +396,6 @@ export default {
       li {
         display: block;
         font-size: 13px;
-        line-height: 15px;
         border-right: none;
         background: white;
         border-bottom: 0;
@@ -377,10 +404,15 @@ export default {
         }
 
         a {
-          display: block;
-          padding: 18px 0;
-        }
+          line-height: 40px;
+          @include from(sm){
+            line-height: 50px;
+          }
 
+          &:after {
+            display: none;
+          }
+        }
         &:hover,
         & a:hover {
           color: $primary;
