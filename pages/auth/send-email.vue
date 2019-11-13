@@ -112,7 +112,7 @@ export default{
       bands: [],
       checkedBands: [],
       search: '',
-      totalEmails: [],
+      totalEmails: null,
       messages: {
         group: 'send-email',
         type: null,
