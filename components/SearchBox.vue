@@ -14,8 +14,8 @@
     <form class="search-box-container" id="searchBox" method="post" @submit.prevent="_send()">
 
       <div class="search-box__inputs">
-        <input type="text" placeholder="Taldearen izena" v-model="searchData.name" @focus="_focusEvent()">
-        <input type="text" placeholder="Musika mota" v-model="searchData.music" @focus="_focusEvent()">
+        <input type="text" placeholder="Taldea" v-model="searchData.name">
+        <input type="text" placeholder="Musika mota" v-model="searchData.music">
       </div>
 
       <div class="slidecontainer">
@@ -77,9 +77,9 @@ export default {
     // window.addEventListener('resize', this._getWindowWidth)
   },
   computed: {
-    // ...mapGetters({
-    //   searchEvent: 'search/getSearchEvent'
-    // }),
+    ...mapGetters({
+      searchEvent: 'search/getSearchEvent'
+    }),
     total() {
       return this.searchData.percent
     }
@@ -100,14 +100,6 @@ export default {
           document.getElementById("searchBox").classList.add('opened')
           this.open = true
 
-          let postData = {
-            name: '',
-            music: '',
-            percent: 1,
-            byName: false,
-            byWomen: false
-          }
-          this.$store.dispatch('search/changeSearchAction', postData)
 
         }else{
           document.getElementById("searchBox").classList.remove('opened')
@@ -136,9 +128,6 @@ export default {
         }
       }, 10)
     },
-    _focusEvent(){
-      this.open = true
-    },
     _send() {
       this.loaderStatus = true
       let postData = {
@@ -146,7 +135,8 @@ export default {
         music: this.searchData.music ? this.searchData.music : '',
         percent: this.searchData.percent,
         byName: this.searchData.order.byName,
-        byWomen: this.searchData.order.byWomen
+        byWomen: this.searchData.order.byWomen,
+        searching: true
       }
       this.$store.dispatch('search/changeSearchAction', postData).then(res => {
         this.loaderStatus = false

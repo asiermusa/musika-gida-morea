@@ -5,7 +5,7 @@
 
     <div class="content">
       <div class="content__desc">
-        Musika gida moreak autokritika du abiapuntu. Iparragirre Rock Elkartean,
+        Musika Gida Moreak autokritika du abiapuntu. Iparragirre Rock Elkartean,
         urteroko programazioan emakumez osaturiko taldeak bermatzea izan da helburuetako
         bat. Hala ere, sasoi amaieretara heldutakoan, proposamen hau bete gabe geratu dela
         konturatu izan gara. Hausnarketa eginez ta egoera honi buelta emateko ahaleginetan,
@@ -16,10 +16,10 @@
 
       <div class="content__desc">
         Gaiaren konplexutasuna kontutan izanda, azkeneko galderei erantzun bat emotekotan
-        sortu da Musika gida morea. Tresna honen helburua, emakumeen presentzia duen edozein talderi
+        sortu da Musika Gida Morea. Tresna honen helburua, emakumeen presentzia duen edozein talderi
         buruzko informazioa jasoko duen datu base digital zabal ta erabilgarri bat aurkeztea da,
         behingoz informazio falta ez dadin arrazoi edo aitzakiatzat hartu gure taulen gainean
-        emakumezko erreferentziarik ez egoteko.
+        emakumezko erreferentziarik ez egoteko.<br><br> Erabili sarean <strong>#MusikaGidaMorea</strong>
       </div>
 
       <div class="content__title">
@@ -70,7 +70,7 @@
             <div class="map__title">{{ region }}</div>
             <ul>
               <li v-for="band in regionData">
-                <nuxt-link :to="'bands/' + band.slug">
+                <nuxt-link :to="'../band/' + band.slug">
                   <i class="la la-angle-right"></i> {{band.name}}
                 </nuxt-link>
               </li>
@@ -106,7 +106,7 @@
       </div>
 
       <!-- push notifications -->
-      <div class="graphic">
+      <!-- <div class="graphic">
         <div class="graphic__col1">
 
           <div class="content__title">Noizbehinkako abisuak</div>
@@ -131,7 +131,8 @@
         <div class="graphic__col2 push-div">
           <img class="push-image" src="~/assets/img/push-image.png" alt="Gida Morea">
         </div>
-      </div>
+      </div> -->
+
     </div>
 
   </div>

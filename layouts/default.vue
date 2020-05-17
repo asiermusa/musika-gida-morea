@@ -42,6 +42,7 @@
 <script>
 import {config} from '~/config'
 import {mapState} from 'vuex'
+import {mapGetters} from 'vuex'
 import MainMenu from '~/components/MainMenu.vue'
 import SearchBox from '~/components/SearchBox.vue'
 import { askForPermissioToReceiveNotifications } from '~/plugins/push.js'
@@ -53,20 +54,15 @@ export default {
   },
   data(){
     return {
-      isOffline: false,
       subStatus: false
     }
   },
   created(){
-    window.addEventListener('online', this._networkStatus)
-    window.addEventListener('offline', this._networkStatus)
-    this._networkStatus()
 
     // push askForPermissioToReceiveNotificationssetTimeout( () => {
     setTimeout(()=> {
       this._pushNotifications()
     }, 1000)
-
 
     // console message
     let styleLog1 = "padding: 5px; background: #7b3772; display: inline-block; color:#ffffff; font-weight: bold; font-size: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;",
@@ -75,21 +71,24 @@ export default {
     console.log("%c#MusikaGidaMorea %cVue.js eta Nuxt bidez egina %cAplikazioaren garapena @asiermusa\n", styleLog1, styleLog2, styleLog3)
   },
   methods: {
-    _networkStatus(){
-      (navigator.onLine) ? this.isOffline = false : this.isOffline = true;
-    },
     async _pushNotifications(){
-      let pushStatus = window.localStorage.getItem('__gidamorea-push')
-      if(!pushStatus){
+      //let pushStatus = window.localStorage.getItem('__gidamorea-push')
+      let pushStatus = true
+      if(pushStatus){
         localStorage.setItem('__gidamorea-push', true)
         const getToken = await askForPermissioToReceiveNotifications()
+
+        //TODO check with alert the config.topic name to subscribe
+
         try {
           let postData = {
             topic: config.pushTopic,
             mode: 'subscribe',
             token: getToken,
           }
-          this.$axios.post(config.apiURL + '/firebase', postData).then()
+          this.$axios.post(config.apiURL + '/firebase', postData).then(() => {
+            console.log(`Subscribed to topic ${config.pushTopic}`)
+          })
         }
         catch(err) {
           console.log(err)
@@ -100,6 +99,9 @@ export default {
   computed: {
     ...mapState ({
       user: state => state.users
+    }),
+    ...mapGetters({
+      searchEvent: 'search/getSearchEvent'
     })
   }
 }

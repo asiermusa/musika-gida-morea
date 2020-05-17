@@ -13,7 +13,11 @@ export const mutations = {
 export const actions = {
   changeSearchAction({commit}, postData){
     commit('SET_SEARCH', postData)
-    this.$router.push('/bands');
+    if(postData.searching == true){
+      this.$router.push('/bands/search')
+    }else{
+      this.$router.push('/bands/')
+    }
   }
 }
 

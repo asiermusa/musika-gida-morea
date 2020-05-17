@@ -9,7 +9,7 @@
       <div class="admin__desc">
         Administrari bezala erabiltzaile guztiek igotako talde guztiak ikusten zabiltza,
         aktibo daudenak eta aktibatzeko falta direnak barne <strong>({{ total }} talde).</strong>
-        Kontu handiz egin, egin beharreko aldaketak.
+        Kontu handiz egin aldaketak.
       </div>
     </div>
 
@@ -23,7 +23,10 @@
 
         <div class="update-list__desc">
           <div class="update-list__name">{{ item.name }}</div>
-          <div class="update-list__user"><i class="la la-user"></i> {{ _getUser(item.user) }}</div>
+          <div class="update-list__user">
+            <i class="la la-user"></i> {{ _getUser(item.user).username }}
+            <span v-if="_getUser(item.user).socialEmail">({{_getUser(item.user).socialEmail}})</span>
+          </div>
           <div class="update-list__status-container">
             <div v-if="item.status == 'publish'">
               <div class="update-list__status publish"></div> <span>Publikatua</span>
@@ -100,7 +103,7 @@ export default {
           }
         });
         if(found)
-          return found.username
+          return found
       }
     },
     _currentUser(){
@@ -160,8 +163,19 @@ export default {
 @import '~/assets/scss/main.scss';
 
 .admin {
-  padding: 30px 20px;
-  margin-bottom: 30px;
+  background-image: linear-gradient(45deg, $primary, darken($primary, 5%));
+  color: white;
+  padding: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  border-radius: 4px;
+
+  &__desc {
+    font-weight: normal;
+    color: lighten($primary,25%);
+    font-size: 13px;
+    margin: 15px 0;
+  }
 }
 
 .update-list {

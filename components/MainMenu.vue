@@ -22,6 +22,9 @@
         <nuxt-link to="/zer-da">Zer da gida hau</nuxt-link>
       </li>
       <li>
+        <nuxt-link to="/send-email">Taldeak elkarbanatu</nuxt-link>
+      </li>
+      <li>
         <nuxt-link to="/login">Saioa hasi</nuxt-link>
       </li>
       <li>
@@ -34,6 +37,9 @@
       </li>
       <li>
         <nuxt-link to="/zer-da">Zer da gida hau</nuxt-link>
+      </li>
+      <li>
+        <nuxt-link to="/send-email">Taldeak elkarbanatu</nuxt-link>
       </li>
       <li class="main-menu__has-submenu js-submenu avatar" @click.prevent.stop="_submenu()" :class="{avatarActive : isActive}">
 
@@ -66,9 +72,6 @@
           </li>
           <li>
             <nuxt-link to="/auth/update">Igotakoak editatu</nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/auth/send-email">Emaila bidali</nuxt-link>
           </li>
           <li>
             <nuxt-link to="/auth/push-notifications">Ezarpenak*</nuxt-link>

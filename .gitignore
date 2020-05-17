@@ -13,4 +13,7 @@ npm-debug.log
 # Nuxt generate
 dist
 
-*/.nojekyll
+# Nodejs backend
+/backend
+
+*.nojekyll

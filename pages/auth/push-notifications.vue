@@ -30,10 +30,10 @@
           <textarea v-model="push.content" rows="4" cols="80" placeholder="Textua"></textarea>
           <input type="text" v-model="push.link" placeholder="Klik egiterakoan lotura">
           <input type="text" v-model="push.image" placeholder="Irudiaren URLa (https bidez)">
-          <input type="text" v-model="push.icon" value="https://i.ibb.co/qCW19nb/pushIcon.png" placeholder="Ikonoa (https bidez)">
+          <input type="text" v-model="push.icon" value="https://musikagidamorea.eus/push.png" placeholder="Ikonoa (https bidez)">
           <div class="notes">
             Defektuz erabili honako ikonoa: <br>
-            <strong>https://i.ibb.co/qCW19nb/pushIcon.png</strong>
+            <strong>https://musikagidamorea.eus/push.png</strong>
           </div>
           <button @click.prevent="_sendPush()" class="submit">
             <loader v-if="loaderStatus" color="white" margin="no-margin"></loader>
@@ -133,6 +133,8 @@ export default{
           image: this.push.image,
           icon: this.push.icon
         }
+        setTimeout(()=> {
+
 
         this.$axios.post(config.apiURL + '/send-push', postData)
           .then(res => {
@@ -142,6 +144,8 @@ export default{
           .catch(err => {
             this.loaderStatus = false
           })
+
+        }, 500)
 
       }else{
         this._message('warn')

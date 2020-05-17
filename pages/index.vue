@@ -3,7 +3,7 @@
 <script>
   export default {
     created(){
-      this.$router.push('bands')
+      this.$router.push('bands/')
     }
   }
 </script>

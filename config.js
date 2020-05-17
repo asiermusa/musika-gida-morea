@@ -17,6 +17,8 @@ let socialList = [
   'TWITTER',
   'FACEBOOK',
   'INSTAGRAM',
+  'YOUTUBE',
+  'SPOTIFY'
 ]
 
 if (env == 'development'){
@@ -27,7 +29,9 @@ if (env == 'development'){
     countryList,
     socialList,
     title: 'Musika Gida Morea ♀',
-    pushTopic: 'musikaMorea11-06'
+    pushTopic: 'musikaMorea11-15',
+    pushingDev: 'musikaMoreaDev11-15'
+
   }
 }
 else{
@@ -38,7 +42,9 @@ else{
     countryList,
     socialList,
     title: 'Musika Gida Morea ♀',
-    pushTopic: 'musikaMorea11-06'
+    pushTopic: 'musikaMorea11-15',
+    pushingDev: 'musikaMoreaDev11-15'
+
   }
 }
 
